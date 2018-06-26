@@ -1,0 +1,266 @@
+@font-face {
+    font-family: "star_wars";
+    src: url(Fonts/StarJediOutline.eot);
+    src: url(Fonts/StarJediOutline.woff) format("woff"),
+         url(Fonts/StarJediOutlineeot.eot?#iefix) format("embedded-opentype"),
+         url(Fonts/StarJediOutlineeot.svg#QuadrantaBold) format("svg");
+}
+
+@keyframes appear{
+    0% {opacity : 0;}
+    100% {opacity : 1;}
+}
+
+@keyframes up_down{
+    0% {transform: translate(0px, 0px); opacity: 0;}
+    50% {transform: translate(0px, 200px); opacity : 1;}
+    100% {transform: translate(0px, 400px); opacity: 0;}
+}
+
+@keyframes right_left{
+    0% {transform: translate(0px); opacity: 0;}
+    50% {transform: translate(200px); opacity : 1;}
+    100% {transform: translate(400px); opacity: 0;}
+}
+
+@keyframes pulsate{
+    0%{transform:scale(1)}
+    50%{transform:scale(0.8)}
+    100%{transform:scale(1)}
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.wrapper{
+    position: absolute;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.star{
+    position: absolute;
+    background-color: white;
+}
+
+h1{
+    font-family: "star_wars";
+    color: #FFDC02;
+    display: flex;
+    justify-content: center;
+}
+
+h2{
+    font-family: "star_wars";
+    color: #FFDC02;
+}
+
+.info_time_gain{
+    font-family: "star_wars";
+    color: #FFDC02;
+}
+
+.tot_gain{
+    font-family: "star_wars";
+    color: #FFDC02;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media only screen and (max-device-width: 600px){
+
+    h1{
+        font-size: 4em;
+        margin: 0;
+    }
+
+    h2{
+        display: flex;
+        justify-content: center;
+        font-size: 3em;
+    }
+    
+    .game{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #left_side{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .info_time_gain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 3em;
+        margin: 0;
+    }
+    
+    .timer p {
+        margin: 0;
+    }
+    
+    .gain_sec p {
+        margin: 0;
+    }
+    
+    #death_star{
+        width: 50em;
+    }
+    
+    .tot_gain{
+        font-size: 3em;
+    }
+    
+    .update {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .update_icon{
+        width: 14em;
+        height: 14em;
+        opacity: 1;
+    }
+    
+    .tooltip .tooltiptext {
+        width : 400px;
+        bottom : 100%;
+        left : 50%;
+        margin-left : -200px;
+        font-size: 3em;
+    }
+    
+}
+
+@media only screen and (min-device-width: 600px){
+    h1{
+        position : absolute;
+        left: 0;
+        right: 0;
+        font-size: 3em;
+        margin: 0 auto;
+    }
+    
+    .game {
+        display: flex;
+    }
+    
+    #left_side{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 3;
+    }
+    
+    .info_time_gain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5em;
+        font-size: 1.5em;
+    }
+    
+    .tot_gain{
+        font-size: 1.5em;
+    }
+    
+    #right_side{
+        flex: 1;
+        margin-top: 5em;
+    }
+    
+    .update_icon{
+        width: 10em;
+        height: 10em;
+        opacity: 1;
+    }
+    .tooltip .tooltiptext {
+        width: 150px;
+        top: -5px;
+        left : 105%;
+        font-size: 1.5em;
+    }
+}    
+
+@media only screen and (min-device-width: 768px){
+    
+    #left_side{
+        flex: 1;
+    }
+    
+    .info_time_gain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .click_star{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .tot_gain{
+        display: flex;
+        justify-content: center;
+    }
+    
+    #right_side{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .update{
+        display:flex;
+        flex-direction: row;
+    }
+    
+    .update_icon{
+        height: 10em;
+        width: 10em;
+    }
+    
+    .tooltip .tooltiptext {
+        width : 200px;
+        top : 100%;
+        left : 50%;
+        margin-left : -100px;
+    }
+   
+}
