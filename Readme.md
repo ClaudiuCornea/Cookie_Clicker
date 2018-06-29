@@ -21,6 +21,9 @@ Je vais réaliser un clicker game sur le théme Star-Wars.
 * rajouter une image
 * options sur le nombre d'étoiles
 * options sur les keyframes
+## Feedback
+* [ ] version Firefox
+* [ ] ajouter des instructions / onglet help
 ## Status
 ```
 Début : Lundi 11 juin.

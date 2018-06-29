@@ -1,13 +1,5 @@
 // The background
-const num_stars = 500;
-
-function get_random_position() {  
-        let y = window.innerWidth;
-        let x = window.innerHeight;
-        let random_x = Math.floor(Math.random()*x);
-        let random_y = Math.floor(Math.random()*y);
-        return [random_x,random_y];
-}
+let num_stars = 500;
 
 function random_between(min,max){
     let random_x=Math.round((Math.random()*(max-min)+min));
@@ -15,36 +7,31 @@ function random_between(min,max){
 }
 
 function background_stars(){
+    let y = window.innerWidth;
+    let x = window.innerHeight;
     for (let i = 0; i < num_stars; i++) {
         let star = document.createElement("div");
-        let xy = get_random_position();
-        let duration = random_between(30,60) + "s";
-        let move_or_not = random_between(0,1);
-        let size = random_between(1,3);
-        let index = random_between(-1,1);
         star.className = "star";
-        star.style.top = xy[0] + "px";
-        star.style.left = xy[1] + "px";
-        star.style.width = size + "px";
-        star.style.height = size + "px";
-        star.style.zIndex = index;
-        switch (move_or_not){
+        star.style.top = random_between(0,x) + "px";
+        star.style.left = random_between(0,y) + "px";
+        star.style.width = random_between(1,3) + "px";
+        star.style.height = random_between(1,3) + "px";
+        star.style.zIndex = random_between(-1,1);
+        switch (random_between(0,1)){
             case 0:
-                star.style.animation = "appear "+ duration +" linear 0s infinite alternate forwards running";
-                break;
-            case 3:
-                star.style.animation = "up_down "+ duration +" linear 0s infinite normal forwards running";
-                break;
-            case 2:
-                star.style.animation = "up_down "+ duration +" linear 0s infinite reverse forwards running";
+                star.style.animation = "appear " + random_between(30,60) + "s linear 0s infinite alternate forwards running";
                 break;
             case 1:
-                star.style.animation = "right_left "+ duration +" linear 0s infinite normal forwards running";
+                star.style.animation = "right_left " + random_between(30,60) + "s linear 0s infinite normal forwards running";
+                break;
+            case 2:
+                star.style.animation = "up_down " + random_between(30,60) + "s linear 0s infinite reverse forwards running";
+                break;
+            case 3:
+                star.style.animation = "up_down " + random_between(30,60) + "s linear 0s infinite normal forwards running";
                 break;
             case 4:
-                star.style.animation = "right_left "+ duration +" linear 0s infinite reverse forwards running";
-                break;
-            case 5:
+                star.style.animation = "right_left " + random_between(30,60) + "s linear 0s infinite reverse forwards running";
                 break;
         }
         document.getElementsByClassName("stars_background")[0].append(star);
@@ -54,8 +41,7 @@ function background_stars(){
 function add_0(x, milisec){
     if (x<10){
         x = '0' + x;
-    }
-    if (milisec){
+    }else if (milisec){
         if (x<100){
             x = '0' + x;
         }
@@ -103,22 +89,21 @@ function time(){
 let click_value = 1;
 let click_auto= 0;
 
-function click_animation_on(){
+function click_animation(_reset_){
     let death_star = document.getElementById("death_star");
-    death_star.style.animation = "pulsate linear 0.1s 1 normal both running";
-}
-
-function click_animation_off(){
-    let death_star = document.getElementById("death_star");
-    death_star.style.animation = "null";
+    if (_reset_){
+        death_star.style.animation = "null";
+    }else{
+        death_star.style.animation = "pulsate linear 0.1s 1 normal both running";
+    }
 }
 
 function click_able(auto){
     let total = parseInt(document.getElementById("total_gain").innerHTML);
     if (!auto){
         total += click_value;
-        click_animation_on();
-        setTimeout(click_animation_off, 1);
+        click_animation();
+        setTimeout( () => click_animation(true), 0.1);
     }else{
         total += click_auto;
     }
@@ -151,17 +136,19 @@ function random_helmet(){
     return(result);
 }
 
-function generate_update_icon(id){
+function generate_update_icon(_id_){
     let parent_0 = document.getElementsByClassName("update")[0];
     let parent_1 = document.createElement("div");
     let img = document.createElement("img");
     let description = document.createElement("p");
-    parent_1.className = "tooltip";
-    description.className = "tooltiptext";
-    parent_1.id = (id + "_div");
     let helmet = random_helmet();
-    img.id= id;
+    parent_1.id = (_id_ + "_div");
+    parent_1.className = "tooltip";
+    img.id= _id_;
     img.className = "update_icon";
+    img.src = helmet[0];
+    img.style.cursor = 'pointer';
+    description.className = "tooltiptext";
     switch (helmet[1]){
         case 0:
             img.classList.add("1");
@@ -188,9 +175,7 @@ function generate_update_icon(id){
             description.innerHTML = "<strong>Emperor of the Gactic Empire</strong><br/>Gain :<br/>+14 click value<br/>+14 auto click value<br/>Price<br/>" + price_upgrade + " credits";
             break;
     }
-    price_upgrade *= 2;
-    img.src = helmet[0];
-    img.style.cursor = 'pointer';
+    price_upgrade = Math.round( price_upgrade * 1.5);
     parent_0.appendChild(parent_1);
     parent_1.appendChild(img);
     parent_1.appendChild(description);
@@ -203,11 +188,10 @@ function generate_icons(number){
 }
 
 function use_upgrade(cible){
-    let update = cible.srcElement.classList;
     let id = cible.srcElement.id;
-    id += "_div";
-    parent = document.getElementById(id);
+    let update = cible.srcElement.classList;
     let total = parseInt(document.getElementById("total_gain").innerHTML);
+    parent = document.getElementById(id + "_div");
     if (update.length == 4){
         click_value += parseInt(update[1]);
         click_auto += parseInt(update[2]);
