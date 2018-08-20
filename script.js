@@ -1,5 +1,5 @@
 // The background
-let num_stars = 500;
+let num_stars = 1000;
 
 function random_between(min,max){
     let random_x=Math.round((Math.random()*(max-min)+min));
@@ -17,7 +17,7 @@ function background_stars(){
         star.style.width = random_between(1,3) + "px";
         star.style.height = random_between(1,3) + "px";
         star.style.zIndex = random_between(-1,1);
-        switch (random_between(0,1)){
+        switch (random_between(0,4)){
             case 0:
                 star.style.animation = "appear " + random_between(30,60) + "s linear 0s infinite alternate forwards running";
                 break;
